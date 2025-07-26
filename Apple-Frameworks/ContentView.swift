@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
 
+    @StateObject var viewModel = ContentViewViewModel()
+
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
@@ -19,10 +21,19 @@ struct ContentView: View {
                 LazyVGrid(columns: columns){
                     ForEach(MockData.frameworks){ framework in
                         FrameworkTitleView(framework: framework)
+                            .onTapGesture {
+                                viewModel.selectedFramework = framework
+                            }
                     }
                 }
             }
             .navigationTitle("⌘ Frameworks")
+            .sheet(isPresented: $viewModel.isShowingDetailsView){
+                FrameworkDetailView(
+                    framework: viewModel.selectedFramework ?? MockData
+                        .sampleFramework, // usually you put the not found or error message as no frameworks are selected
+                    isShowingDetailsView: $viewModel.isShowingDetailsView)
+            }
         }
 
     }
