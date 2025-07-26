@@ -17,11 +17,11 @@ import Combine
 
 final class ContentViewViewModel: ObservableObject {
 
-    var selectedFramework: Framework?{
-        didSet { isShowingDetailsView = true }
-    }
-
-    @Published var isShowingDetailsView = false
+//    var selectedFramework: Framework?{
+//        didSet { isShowingDetailsView = true }
+//    }
+//
+//    @Published var isShowingDetailsView = false
 
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
